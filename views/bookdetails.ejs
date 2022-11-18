@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details</title>
+</head>
+<body>
+    <div>
+        <h1>Book Details</h1>
+        <a href="/"><button>Home</button></a>
+        <a href="/new">
+            <button>Add Book</button>
+        </a>
+        
+        <div>
+            <h1><%=data.title%></h1>
+            <ul>
+              <li>
+                <h4 class=>Title:</h4>
+                <h5><%=data.title%></h5>
+                <h4>Author:</h4>
+                <h5><%=data.author%></h5>
+                <h4>Genre:</h4>
+                <h5><%=data.genre%></h5>
+              </li>
+            </ul>
+        </div>
+
+    </div>
+
+</body>
+</html>

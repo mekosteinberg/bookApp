@@ -1,12 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Add Book</title>
 </head>
+
 <body>
-    
+    <div>
+        <h1>Book Dragon</h1>
+        <h4>It's Not Hoarding if it's Books</h4>
+        <a href="/bookshelf">
+            <button>View Shelf</button>
+        </a>
+        <form action="/create" method="POST">
+            Title: <input type="text" name="title" placeholder="Title" required><br />
+            Author: <input type="text" name="author" placeholder="Author(Last, First)" required><br />
+            Genre: <input type="text" name="genre" placeholder="Genre"><br />
+            I Own it! <input type="checkbox" name="own"><br />
+            Physical Copy <input type="checkbox" name="paper"><br />
+            Audiobook <input type="checkbox" name="audio"><br />
+            e-Book <input type="checkbox" name="ebook"><br />
+            I Read it! <input type="checkbox" name="readit"><br />
+            Comments: <input type="text" name="comments" placeholder="optional comments"><br />
+            <input type="submit" value="add book">
+
+        </form>
+        <div>
+
+        </div>
+
+    </div>
 </body>
+
 </html>
