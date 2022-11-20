@@ -2,10 +2,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Book</title>
+    <%- include('./partials/head.ejs') %>
+        <title>Add Book</title>
 </head>
 
 <body>
@@ -25,14 +23,18 @@
             e-Book <input type="checkbox" name="ebook"><br />
             I Read it! <input type="checkbox" name="readit"><br />
             Comments: <input type="text" name="comments" placeholder="optional comments"><br />
-            <input type="submit" value="add book">
+            <input type="submit" value="Add Book">
 
         </form>
+        <a href="/">
+            <button>Home</button>
+        </a>
         <div>
 
         </div>
 
     </div>
+
 </body>
 
 </html>

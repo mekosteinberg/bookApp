@@ -4,6 +4,7 @@ const { boolean } = require("webidl-conversions");
 
 const bookSchema = new mongoose.Schema(
     {
+        userid: String,
         title: { type: String, required: true },
         author: { type: String, required: true },
         genre: { type: String },
