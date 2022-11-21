@@ -17,15 +17,33 @@ router.get('/', (req, res) => {
 router.get('/bookshelf', requiresAuth(), (req, res) => {
     bookSchema.find({}, (err, allBooks) => {
         if (err) console.log(err)
-        console.log(allBooks)
         res.render('bookshelf.ejs', { data: allBooks });
     });
 
 })
 
 //post new book to bookshelf from new page
-router.post('/create', (req, res) => {
-    bookSchema.create({ ...req.body, userid: req.oidc.user.sub }, (err, createbookData) => {
+router.post('/create', requiresAuth(), (req, res) => {
+    const own = {
+        paper: false,
+        audio: false,
+        ebook: false,
+    }
+    //mapping values set in the webform to the mongoose dataset
+    if (req.body.paper === 'on') {
+        own.paper = true
+    }
+    if (req.body.audio === 'on') {
+        own.audio = true
+    }
+    if (req.body.ebook === 'on') {
+        own.ebook = true
+    }
+    const genretag = req.body.genretag
+    const tags = genretag.split(' ');
+    const book = { ...req.body, own, userid: req.oidc.user.sub, tags }
+    console.log(book);
+    bookSchema.create(book, (err, createbookData) => {
         console.log(err)
         res.redirect('/bookshelf')
     });
@@ -40,7 +58,7 @@ router.get('/seed', (req, res) => {
 });
 
 //add new / post to booklist
-router.get('/new', (req, res) => {
+router.get('/new', requiresAuth(), (req, res) => {
     res.render('new.ejs');
 });
 
