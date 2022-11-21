@@ -1,32 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <%- include('./partials/head.ejs') %>
-    <title>Book Details</title>
+        <title>Book Details</title>
 </head>
+
 <body>
-    <div>
+    <header>
         <h1>Book Details</h1>
-        <a href="/"><button>Home</button></a>
-        <a href="/new">
-            <button>Add Book</button>
-        </a>
-        
+    </header>
+    <div>
+
+
         <div>
-            <h1><%=data.title%></h1>
+            <h1>
+                <%=data.title%>
+            </h1>
             <ul>
-              <li>
-                <h4 class=>Title:</h4>
-                <h5><%=data.title%></h5>
-                <h4>Author:</h4>
-                <h5><%=data.author%></h5>
-                <h4>Genre:</h4>
-                <h5><%=data.genre%></h5>
-              </li>
+                <li>
+                    <h4 class=>Title:</h4>
+                    <h5>
+                        <%=data.title%>
+                    </h5>
+                    <h4>Author:</h4>
+                    <h5>
+                        <%=data.author%>
+                    </h5>
+                    <h4>Genre:</h4>
+                    <h5>
+                        <%=data.genre%>
+                    </h5>
+                </li>
             </ul>
         </div>
-
+        <a href="/bookshelf">Back to Shelf</a>
+        <a href="/edit">Edit This</a>
+        <a href=""><img src="" alt="">Delete</a>
     </div>
 
 </body>
+
 </html>

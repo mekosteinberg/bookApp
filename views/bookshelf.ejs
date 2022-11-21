@@ -1,19 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('./partials/header') %>
 
-<head>
-    <%- include('./partials/head.ejs') %>
-    <title>Bookshelf</title>
-</head>
-
-<body>
     <div>
-        <h1>Book Shelf</h1>
-        <h4>It's Not Hoarding if it's Books</h4>
         <a href="/new">
-            <button>Add Book</button>
+            <button>Add a Book</button>
         </a>
-        <a href="/"><button>Home</button></a>
         <% data.forEach((book)=> {%>
             <div>
                 <h5>
@@ -24,6 +14,4 @@
             <%})%>
     </div>
 
-</body>
-
-</html>
+    <%- include('./partials/footer') %>

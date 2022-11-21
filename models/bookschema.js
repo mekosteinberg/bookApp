@@ -4,16 +4,19 @@ const { boolean } = require("webidl-conversions");
 
 const bookSchema = new mongoose.Schema(
     {
-        userid: String,
+        userid: { type: String, required: true },
         title: { type: String, required: true },
-        author: { type: String, required: true },
-        genre: { type: String },
-        own: { type: Boolean, required: true, default: false },
-        paper: Boolean,
-        audio: Boolean,
-        ebook: Boolean,
-        readit: { type: Boolean, required: true, default: false},
-        comments: [String]
+        authorFirst: { type: String, required: true },
+        authorLast: { type: String, required: true },
+        own: [
+            {
+                paper: { type: Boolean, required: true, default: false },
+                audio: { type: Boolean, required: true, default: false },
+                ebook: { type: Boolean, required: true, default: false }
+            }],
+        readStatus: { type: String, enum: ["read", "reading", "wantToRead"] },
+
+        tags: { type: [String] },
     },
     {
         timestamps: true,
