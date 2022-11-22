@@ -15,10 +15,11 @@ router.get('/', (req, res) => {
 
 //bookshelf/list
 router.get('/bookshelf', requiresAuth(), (req, res) => {
+    console.log('-----query params', req.query)
     bookSchema.find({ userid: req.oidc.user.sub }, (err, allBooks) => {
         if (err) console.log(err)
         res.render('bookshelf.ejs', { data: allBooks });
-    });
+    }).sort({ title: 1 });
 })
 
 //post new book to bookshelf from new page

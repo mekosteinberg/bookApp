@@ -2,3 +2,5 @@ Bootstrap Crash Course WebDevSimplified on Youtube https://www.youtube.com/watch
 
 Auth0
 npm install express express-openid-connect --save
+
+MDN for EVERYTHING ALL THE TIME
