@@ -1,20 +1,39 @@
 <%- include('./partials/header') %>
 
     <div>
-        <a href="/new">
-            <button>Add a Book</button>
-        </a>
+        <div class="btn-toolbar">
+            <div class="btn-group me-2">
+                <a href="/new" class="btn btn-primary">Add a Book</a>
+            </div>
+            <div class="btn-group me-2">
+                <a href="" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Sort
+                    By</a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><button class="dropdown-item" type="button">Title A-Z</button></li>
+                    <li><button class="dropdown-item" type="button">Title Z-A</button></li>
+                    <li><button class="dropdown-item" type="button">Author A-Z</button></li>
+                    <li><button class="dropdown-item" type="button">Author Z-A</button></li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <a href="" class="btn btn-primary">Filter By</a>
+            </div>
+        </div>
+
         <% data.forEach((book)=> {%>
             <div class="container">
                 <div class="row">
-                  <a href="/bookshelf/<%=book._id%>">
-                    <h6 class="col">
-                        <%=book.title%>
-                    </h6>
-                    <h6 class="col">
+
+                    <div class="col">
+                        <a href="/bookshelf/<%=book._id%>">
+                            <%=book.title%>
+                        </a>
+                    </div>
+
+                    <div class="col">
                         <%=book.authorLast%>, <%=book.authorFirst%>
-                    </h6>
-                </a>
+                    </div>
+
                 </div>
             </div>
             <%})%>

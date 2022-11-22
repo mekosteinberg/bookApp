@@ -10,9 +10,7 @@
     <div>
         <h1>Book Dragon</h1>
         <h4>It's Not Hoarding if it's Books</h4>
-        <a href="/bookshelf">
-            <button>View Shelf</button>
-        </a>
+        <a href="/bookshelf" class="btn btn-primary">View Shelf</a>
         <form action="/create" method="POST">
             Title: <input type="text" name="title" placeholder="Title" required><br />
 
@@ -31,12 +29,10 @@
 
             Genre Tags: <input type="text" name="genretag" placeholder="Genre Tags"><br />
 
-            <input type="submit" value="Add Book">
+            <input type="submit" class="btn btn-primary" value="Add Book">
 
         </form>
-        <a href="/bookshelf">
-            <button>Cancel</button>
-        </a>
+        <a href="/bookshelf" class="btn btn-danger">Cancel</a>
         <div>
 
         </div>
