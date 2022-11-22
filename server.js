@@ -5,7 +5,7 @@ const db = mongoose.connection;
 const methodOverride = require("method-override");
 const bookRouter = require("./routes/routes");
 const { auth } = require('express-openid-connect');
-
+const port = process.env.PORT || 3000;
 
 require('dotenv').config()
 const mongoURI = process.env.MONGO_URI
@@ -63,6 +63,6 @@ mongoose.connect(mongoURI, {
     console.log("Database is connected");
 });
 
-app.listen(3000, () => console.log("Reading on port 3000"));
+app.listen(port, () => console.log("Reading on port 3000"));
 
 
