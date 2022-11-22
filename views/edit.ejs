@@ -1,17 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('./partials/header') %>
 
-<head>
-    <%- include('./partials/head.ejs') %>
-        <title>Edit Book Dragon</title>
-</head>
+    <a href="/bookshelf">
+        <button>View Shelf</button>
+    </a>
+    <form action="/bookshelf/<%=data._id%>?_method=PUT" method="POST">
+        Title: <input type="text" name="title" value="<%=data.title%>"><br />
 
-<body>
-    <header>
-        <h1>Book Dragon</h1>
-        <h4>It's Not Hoarding if it's Books</h4>
-    </header>
+        Author First: <input type="text" name="authorFirst" value="<%=data.authorFirst%>"><br />
+        Author Last: <input type="text" name="authorLast" value="<%=data.authorLast%>"><br />
 
-</body>
+        I Own it!<br />
+        <input type="checkbox" name="audio" <%=data.own.audio ? "checked" : "" %>>Audiobook<br />
+        <input type="checkbox" name="ebook" <%=data.own.ebook ? "checked" : "" %>>e-Book<br />
+        <input type="checkbox" name="paper" <%=data.own.paper ? "checked" : "" %>>Paper/Hard-back<br />
 
-</html>
+        I Read it!<br />
+        <input type="radio" name="readStatus" value="reading" <%=data.readStatus==='reading' ? "checked" : "" %>>Reading
+        It<br />
+        <input type="radio" name="readStatus" value="read" <%=data.readStatus==='read' ? "checked" : "" %>>Finished
+        It<br />
+        <input type="radio" name="readStatus" value="wantToRead" <%=data.readStatus==='wantToRead' ? "checked" : ""
+            %>>Want to Read<br />
+
+        Genre Tags: <input type="text" name="genretag" value="<%=data.genretag%>"><br />
+
+        <input type="submit" value="Save Changes">
+
+    </form>
+    <a href="/bookshelf/<%=data._id%>">Cancel</a>
+
+    <%- include('./partials/footer') %>

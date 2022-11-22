@@ -15,11 +15,10 @@ router.get('/', (req, res) => {
 
 //bookshelf/list
 router.get('/bookshelf', requiresAuth(), (req, res) => {
-    bookSchema.find({}, (err, allBooks) => {
+    bookSchema.find({ userid: req.oidc.user.sub }, (err, allBooks) => {
         if (err) console.log(err)
         res.render('bookshelf.ejs', { data: allBooks });
     });
-
 })
 
 //post new book to bookshelf from new page
@@ -49,6 +48,14 @@ router.post('/create', requiresAuth(), (req, res) => {
     });
 });
 
+//book details
+router.get('/bookshelf/:id', requiresAuth(), (req, res) => {
+    bookSchema.findOne({ userid: req.oidc.user.sub, _id: req.params.id }, (err, data) => {
+        if (err) console.log(err)
+        res.render('bookdetails.ejs', { data });
+    });
+});
+
 //seed
 router.get('/seed', (req, res) => {
     bookSchema.create(bookseed, (err, data) => {
@@ -61,6 +68,50 @@ router.get('/seed', (req, res) => {
 router.get('/new', requiresAuth(), (req, res) => {
     res.render('new.ejs');
 });
+
+//edit/update to booklist
+router.get('/bookshelf/:id/edit', requiresAuth(), (req, res) => {
+    bookSchema.findOne({ userid: req.oidc.user.sub, _id: req.params.id }, (err, foundBook) => {
+        const genretag = foundBook.tags.join(' ');
+        //.toObject required to remove mongoose functions. Mongo function didnt work with spread(...)
+        const data = { ...foundBook.toObject(), genretag }
+        res.render('edit.ejs', { data });
+    });
+});
+
+router.put("/bookshelf/:id", requiresAuth(), (req, res) => {
+    const own = {
+        paper: false,
+        audio: false,
+        ebook: false,
+    }
+    //mapping values set in the webform to the mongoose dataset
+    if (req.body.paper === 'on') {
+        own.paper = true
+    }
+    if (req.body.audio === 'on') {
+        own.audio = true
+    }
+    if (req.body.ebook === 'on') {
+        own.ebook = true
+    }
+    const genretag = req.body.genretag
+    const tags = genretag.split(' ');
+    const book = { ...req.body, own, userid: req.oidc.user.sub, tags }
+    console.log(book);
+    bookSchema.findOneAndUpdate({ userid: req.oidc.user.sub, _id: req.params.id }, book, (err, editData) => {
+        console.log(err)
+        res.redirect('/bookshelf');
+    });
+});
+
+//delete book
+router.delete('/bookshelf/:id', (req, res) => {
+    bookSchema.findByIdAndRemove({ userid: req.oidc.user.sub, _id: req.params.id }, (err, data) => {
+        res.redirect('/bookshelf');
+    });
+});
+
 
 
 

@@ -1,44 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('./partials/header') %>
 
-<head>
-    <%- include('./partials/head.ejs') %>
-        <title>Book Details</title>
-</head>
-
-<body>
-    <header>
-        <h1>Book Details</h1>
-    </header>
     <div>
 
 
         <div>
-            <h1>
-                <%=data.title%>
-            </h1>
+            <h2>
+                Book Details
+            </h2>
             <ul>
                 <li>
-                    <h4 class=>Title:</h4>
-                    <h5>
+                    <h5 class=>Title:</h5>
+                    <h6>
                         <%=data.title%>
-                    </h5>
-                    <h4>Author:</h4>
-                    <h5>
-                        <%=data.author%>
-                    </h5>
-                    <h4>Genre:</h4>
-                    <h5>
-                        <%=data.genre%>
-                    </h5>
+                    </h6>
+                    <h5>Author:</h5>
+                    <h6>
+                        <%=data.authorLast%>, <%=data.authorFirst%>
+                    </h6>
+                    <h5>Genre:</h5>
+                    <h6>
+                        <%=data.tags%>
+                    </h6>
+                    <h5>Own Status</h5>
+                    <h5>Read Status</h5>
                 </li>
             </ul>
         </div>
         <a href="/bookshelf">Back to Shelf</a>
-        <a href="/edit">Edit This</a>
-        <a href=""><img src="" alt="">Delete</a>
+        <a href="/bookshelf/<%=data._id%>/edit">Edit This</a>
+
+        <!-- <a href="/bookshelf"><img src="" alt="">Delete</a> -->
+        <form class="" action="/bookshelf/<%=data._id%>?_method=DELETE" method="POST">
+            <input class="btn" type="submit" value="Delete"
+                onclick="return confirm('Do you really want to delete this book?')" />
+        </form>
     </div>
 
-</body>
-
-</html>
+    <%- include('./partials/footer') %>
