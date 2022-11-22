@@ -20,7 +20,7 @@ router.get('/bookshelf', requiresAuth(), (req, res) => {
         if (err) console.log(err)
         res.render('bookshelf.ejs', { data: allBooks });
     }).sort({ title: 1 });
-})
+});
 
 //post new book to bookshelf from new page
 router.post('/create', requiresAuth(), (req, res) => {
