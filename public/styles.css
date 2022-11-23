@@ -4,3 +4,22 @@
     background-repeat: no-repeat;
     background-size: cover;
 } */
+body {
+    background: rgb(9, 9, 73);
+    color: antiquewhite;
+
+}
+
+a {
+    text-decoration: none;
+    color: antiquewhite;
+}
+
+/* truncates text on bookshelf when too long */
+.shelfTitle,
+shelfAuthor {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 280px;
+}

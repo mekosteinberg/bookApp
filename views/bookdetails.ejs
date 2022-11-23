@@ -4,27 +4,27 @@
 
 
         <div>
-            <h2>
-                Book Details
-            </h2>
-            <ul>
-                <li>
-                    <h5 class=>Title:</h5>
-                    <h6>
-                        <%=data.title%>
-                    </h6>
-                    <h5>Author:</h5>
-                    <h6>
-                        <%=data.authorLast%>, <%=data.authorFirst%>
-                    </h6>
+            <h2>Book Details</h2>
 
-                    <h5>Own Status </h5>
-                    <input type="checkbox" name="audio" <%=data.own.audio ? "checked" : "" %> disabled>Audiobook<br />
-                    <input type="checkbox" name="ebook" <%=data.own.ebook ? "checked" : "" %> disabled>e-Book<br />
+            <dl>
+                <dt>Title:</dt>
+                <dd>
+                    <%=data.title%>
+                </dd>
+                <dt>Author:</dt>
+                <dd>
+                    <%=data.authorLast%>, <%=data.authorFirst%>
+                </dd>
+                <dt>Own Status:</dt>
+                <dd><input type="checkbox" name="audio" <%=data.own.audio ? "checked" : "" %>
+                    disabled>Audiobook<br />
+                    <input type="checkbox" name="ebook" <%=data.own.ebook ? "checked" : "" %>
+                    disabled>e-Book<br />
                     <input type="checkbox" name="paper" <%=data.own.paper ? "checked" : "" %>
                     disabled>Paper/Hard-back<br />
-                    <h5>Read Status</h5>
-                    <input type="radio" name="readStatus" value="reading" <%=data.readStatus==='reading' ? "checked"
+                </dd>
+                <dt>Read Status:</dt>
+                <dd><input type="radio" name="readStatus" value="reading" <%=data.readStatus==='reading' ? "checked"
                         : "" %> disabled>Reading
                     It<br />
                     <input type="radio" name="readStatus" value="read" <%=data.readStatus==='read' ? "checked" : "" %>
@@ -32,19 +32,19 @@
                     It<br />
                     <input type="radio" name="readStatus" value="wantToRead" <%=data.readStatus==='wantToRead'
                         ? "checked" : "" %> disabled>Want to Read<br />
-                    <h5>Tags:</h5>
-                    <h6>
-                        <%=data.tags%>
-                    </h6>
-                </li>
-            </ul>
+                </dd>
+                <dt>Tags:</dt>
+                <dd>
+                    <%=data.tags%>
+                </dd>
+            </dl>
         </div>
-        <a href="/bookshelf">Back to Shelf</a>
-        <a href="/bookshelf/<%=data._id%>/edit">Edit This</a>
+        <a href="/bookshelf" class="btn btn-primary">Back to Shelf</a>
+        <a href="/bookshelf/<%=data._id%>/edit" class="btn btn-warning">Edit This</a>
 
         <!-- <a href="/bookshelf"><img src="" alt="">Delete</a> -->
         <form class="" action="/bookshelf/<%=data._id%>?_method=DELETE" method="POST">
-            <input class="btn" type="submit" value="Delete"
+            <input class="btn btn-danger" type="submit" value="Delete"
                 onclick="return confirm('Do you really want to delete this book?')" />
         </form>
     </div>

@@ -3,7 +3,7 @@
     <div>
         <div class="btn-toolbar">
             <div class="btn-group me-2">
-                <a href="/new" class="btn btn-primary">Add a Book</a>
+                <a href="/new" class="btn btn-warning">Add a Book</a>
             </div>
             <div class="btn-group me-2">
                 <a href="" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Sort
@@ -24,13 +24,13 @@
             <div class="container">
                 <div class="row">
 
-                    <div class="col">
+                    <div class="col shelfTitle">
                         <a href="/bookshelf/<%=book._id%>">
                             <%=book.title%>
                         </a>
                     </div>
 
-                    <div class="col">
+                    <div class="col shelfTitle">
                         <%=book.authorLast%>, <%=book.authorFirst%>
                     </div>
 
