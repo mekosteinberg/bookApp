@@ -16,10 +16,20 @@ router.get('/', (req, res) => {
 //bookshelf/list
 router.get('/bookshelf', requiresAuth(), (req, res) => {
     console.log('-----query params', req.query)
+    const {
+        sortBy,
+        sortDirection,
+        skip,
+        limit
+    } = req.query;
+    
     bookSchema.find({ userid: req.oidc.user.sub }, (err, allBooks) => {
         if (err) console.log(err)
         res.render('bookshelf.ejs', { data: allBooks });
-    }).sort({ title: 1 });
+    })
+        .sort({ [sortBy]: sortDirection })
+        .skip(skip || 0)
+        .limit(limit || 10);
 });
 
 //post new book to bookshelf from new page

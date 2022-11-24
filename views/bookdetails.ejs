@@ -39,12 +39,12 @@
                 </dd>
             </dl>
         </div>
-        <a href="/bookshelf" class="btn btn-primary">Back to Shelf</a>
-        <a href="/bookshelf/<%=data._id%>/edit" class="btn btn-warning">Edit This</a>
+        <a href="/bookshelf" class="btn btn-sm btn-primary">Back to Shelf</a>
+        <a href="/bookshelf/<%=data._id%>/edit" class="btn btn-sm btn-warning">Edit This</a>
 
         <!-- <a href="/bookshelf"><img src="" alt="">Delete</a> -->
         <form class="" action="/bookshelf/<%=data._id%>?_method=DELETE" method="POST">
-            <input class="btn btn-danger" type="submit" value="Delete"
+            <input class="btn btn-sm btn-danger" type="submit" value="Delete"
                 onclick="return confirm('Do you really want to delete this book?')" />
         </form>
     </div>

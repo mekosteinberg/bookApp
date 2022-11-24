@@ -16,8 +16,7 @@ a {
 }
 
 /* truncates text on bookshelf when too long */
-.shelfTitle,
-shelfAuthor {
+.shelfOrg {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;

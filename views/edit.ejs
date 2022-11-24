@@ -1,8 +1,6 @@
 <%- include('./partials/header') %>
 
-    <a href="/bookshelf">
-        <button>View Shelf</button>
-    </a>
+    <a href="/bookshelf" class="btn btn-sm btn-warning">View Shelf</a>
     <form action="/bookshelf/<%=data._id%>?_method=PUT" method="POST">
         Title: <input type="text" name="title" value="<%=data.title%>"><br />
 
@@ -24,9 +22,9 @@
 
         Genre Tags: <input type="text" name="genretag" value="<%=data.genretag%>"><br />
 
-        <input type="submit" value="Save Changes">
+        <input type="submit" class="btn btn-sm btn-primary" value="Save Changes">
 
     </form>
-    <a href="/bookshelf/<%=data._id%>">Cancel</a>
+    <a href="/bookshelf/<%=data._id%>" class="btn btn-sm btn-danger">Cancel</a>
 
     <%- include('./partials/footer') %>
