@@ -22,3 +22,26 @@ a {
     overflow: hidden;
     max-width: 280px;
 }
+
+/* footer */
+#contactInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    align-items: center;
+    height: 40px;
+    width: 100%;
+    padding-top: 20px;
+    margin-bottom: 20px 10px;
+    gap: 5px;
+}
+
+footer a {
+    display: inline;
+}
