@@ -1,21 +1,18 @@
 <%- include('./partials/header') %>
 
-    <div>
+    <div class="bookshelfContainer">
 
 
         <div>
             <h2>Book Details</h2>
 
-            <dl>
-                <dt>Title:</dt>
-                <dd>
-                    <%=data.title%>
-                </dd>
-                <dt>Author:</dt>
-                <dd>
-                    <%=data.authorLast%>, <%=data.authorFirst%>
-                </dd>
-                <dt>Own Status:</dt>
+            <dl class="card" style="width: 18rem;">
+                <dt class="card-title">Title: <%=data.title%>
+                </dt>
+                <dt class="card-title">Author: <%=data.authorLast%>, <%=data.authorFirst%>
+                </dt>
+
+                <dt class="card-title">Own Status:</dt>
                 <dd><input type="checkbox" name="audio" <%=data.own.audio ? "checked" : "" %>
                     disabled>Audiobook<br />
                     <input type="checkbox" name="ebook" <%=data.own.ebook ? "checked" : "" %>
@@ -23,7 +20,7 @@
                     <input type="checkbox" name="paper" <%=data.own.paper ? "checked" : "" %>
                     disabled>Paper/Hard-back<br />
                 </dd>
-                <dt>Read Status:</dt>
+                <dt class="card-title">Read Status:</dt>
                 <dd><input type="radio" name="readStatus" value="reading" <%=data.readStatus==='reading' ? "checked"
                         : "" %> disabled>Reading
                     It<br />
@@ -33,20 +30,18 @@
                     <input type="radio" name="readStatus" value="wantToRead" <%=data.readStatus==='wantToRead'
                         ? "checked" : "" %> disabled>Want to Read<br />
                 </dd>
-                <dt>Tags:</dt>
-                <dd>
-                    <%=data.tags%>
-                </dd>
+                <dt class="card-title">Tags: <%=data.tags%>
+                </dt>
             </dl>
         </div>
-            <a href="/bookshelf" class="btn btn-sm btn-primary">Back to Shelf</a>
-            <a href="/bookshelf/<%=data._id%>/edit" class="btn btn-sm btn-warning">Edit This</a>
+        <a href="/bookshelf" class="btn btn-sm btn-primary">Back to Shelf</a>
+        <a href="/bookshelf/<%=data._id%>/edit" class="btn btn-sm btn-warning">Edit This</a>
 
-            <!-- <a href="/bookshelf"><img src="" alt="">Delete</a> -->
-            <form class="" action="/bookshelf/<%=data._id%>?_method=DELETE" method="POST">
-                <input class="btn btn-sm btn-danger" type="submit" value="Delete"
-                    onclick="return confirm('Do you really want to delete this book?')" />
-            </form>
+        <!-- <a href="/bookshelf"><img src="" alt="">Delete</a> -->
+        <form class="" action="/bookshelf/<%=data._id%>?_method=DELETE" method="POST">
+            <input class="btn btn-sm btn-danger" type="submit" value="Delete"
+                onclick="return confirm('Do you really want to delete this book?')" />
+        </form>
     </div>
 
     <%- include('./partials/footer') %>
