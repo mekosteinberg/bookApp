@@ -8,12 +8,21 @@
 
 <body>
     <header>
-        <% if(user) { %>
-            Welcome <%= user.name %>!
-                <a href="/logout" class="btn btn-sm btn-outline-secondary"
-                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .25rem; --bs-btn-font-size: .6rem">Logout</a>
-                <%}%>
-
-                    <h1>Book Dragon</h1>
-                    <h4>It's Not Hoarding if it's Books</h4>
+        <div class="welcome">
+            <% if(user) { %>
+                Welcome <%= user.name %>!
+                    <a href="/logout" class="btn btn-sm btn-outline-secondary"
+                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .25rem; --bs-btn-font-size: .6rem">Logout</a>
+                    <%}%>
+        </div>
+        <div class="headerBox">
+            <div>
+                <img class="dragonImg" src="/images/reading_dragon.webp" alt="dragon reading books" width="80" ,
+                    height="auto">
+            </div>
+            <div>
+                <h1>Book Dragon</h1>
+                <h4>It's Not Hoarding if it's Books</h4>
+            </div>
+        </div>
     </header>

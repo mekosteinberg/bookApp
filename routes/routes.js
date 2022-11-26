@@ -25,7 +25,7 @@ router.get('/bookshelf', requiresAuth(), (req, res) => {
     
     bookSchema.find({ userid: req.oidc.user.sub }, (err, allBooks) => {
         if (err) console.log(err)
-        res.render('bookshelf.ejs', { data: allBooks });
+        res.render('bookshelf.ejs', { data: allBooks, sortBy, sortDirection });
     })
         .sort({ [sortBy]: sortDirection })
         .skip(skip || 0)

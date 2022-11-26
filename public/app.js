@@ -23,7 +23,8 @@ $(() => {
             case "authorDesc":
                 params.set('sortBy', 'authorLast')
                 params.set('sortDirection', 'desc')
-                // params.set('title', 'asc')
+                //next sort by title
+                // params.set('title', 'asc') 
                 break;
             default:
                 console.error("unknown value")
