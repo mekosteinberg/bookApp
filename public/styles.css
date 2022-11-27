@@ -9,7 +9,7 @@ body {
     color: antiquewhite;
     margin-left: 1rem;
     margin-right: 1rem;
-    width: 100%;
+    width: 92%;
     font-family: 'Dosis', sans-serif;
 }
 
@@ -64,6 +64,11 @@ a {
     justify-content: center;
 }
 
+.backEdit {
+    flex-direction: column;
+    margin: 5px 0;
+}
+
 
 
 /* truncates text on bookshelf when too long */
@@ -78,6 +83,10 @@ a {
     margin: 5px 0;
     align-content: center;
     justify-content: center;
+}
+
+.modal {
+    color: black;
 }
 
 /* footer */

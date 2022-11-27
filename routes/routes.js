@@ -14,22 +14,54 @@ router.get('/', (req, res) => {
 });
 
 //bookshelf/list
-router.get('/bookshelf', requiresAuth(), (req, res) => {
+router.get('/bookshelf', requiresAuth(), async (req, res) => {
     console.log('-----query params', req.query)
     const {
         sortBy,
         sortDirection,
         skip,
-        limit
+        limit,
+        tag,
     } = req.query;
-    
-    bookSchema.find({ userid: req.oidc.user.sub }, (err, allBooks) => {
-        if (err) console.log(err)
-        res.render('bookshelf.ejs', { data: allBooks, sortBy, sortDirection });
-    })
+
+    const allBooks = await bookSchema.find({ userid: req.oidc.user.sub })
         .sort({ [sortBy]: sortDirection })
         .skip(skip || 0)
         .limit(limit || 10);
+
+    const tags = await bookSchema.aggregate([
+        {
+            // only get books for this user
+            '$match': {
+                'userid': req.oidc.user.sub
+            }
+        }, {
+            // grab just the tags field
+            '$project': {
+                'tags': 1,
+                '_id': 0
+            }
+        }, {
+            // flatten the arrays into individual items
+            '$unwind': {
+                'path': '$tags'
+            }
+        }, {
+            // deduplicate tags
+            '$group': {
+                '_id': {
+                    'tag': '$tags'
+                },
+                'tag': {
+                    '$first': '$tags'
+                }
+            }
+        }
+    ])
+
+    console.log(tags)
+    res.render('bookshelf.ejs', { data: allBooks, sortBy, sortDirection, tags });
+
 });
 
 //post new book to bookshelf from new page

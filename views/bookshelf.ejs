@@ -1,41 +1,88 @@
 <%- include('./partials/header') %>
 
-        <div class="btn-toolbar">
-            <div class="btn-group me-2">
-                <a href="/new" class="btn btn-sm btn-warning">Add a Book</a>
-            </div>
-            <div class="btn-group me-2">
-                <a href="" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Sort
-                    By</a>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li><button class="dropdown-item sort-item" id="titleAsc" type="button">Title A-Z</button></li>
-                    <li><button class="dropdown-item sort-item" id="titleDesc" type="button">Title Z-A</button></li>
-                    <li><button class="dropdown-item sort-item" id="authorAsc" type="button">Author A-Z</button></li>
-                    <li><button class="dropdown-item sort-item" id="authorDesc" type="button">Author Z-A</button></li>
-                </ul>
-            </div>
-            <div class="btn-group">
-                <a href="" class="btn btn-sm btn-primary">Filter By</a>
-            </div>
+    <div class="btn-toolbar">
+        <div class="btn-group me-2">
+            <a href="/new" class="btn btn-sm btn-warning">Add a Book</a>
         </div>
-
-        <% data.forEach((book)=> {%>
-            <div class="shelfContainer">
-                <div class="row">
-
-                    <div class="col shelfOrg">
-                        <a href="/bookshelf/<%=book._id%>">
-                            <%=book.title%>
-                        </a>
-                    </div>
-
-                    <div class="col shelfOrg">
-                        <%=book.authorLast%>, <%=book.authorFirst%>
-                    </div>
-
-                </div>
-            </div>
-            <%})%>
+        <div class="btn-group me-2">
+            <a href="" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                aria-expanded="false">Sort
+                By</a>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><button class="dropdown-item sort-item" id="titleAsc" type="button">Title A-Z</button></li>
+                <li><button class="dropdown-item sort-item" id="titleDesc" type="button">Title Z-A</button></li>
+                <li><button class="dropdown-item sort-item" id="authorAsc" type="button">Author A-Z</button></li>
+                <li><button class="dropdown-item sort-item" id="authorDesc" type="button">Author Z-A</button></li>
+            </ul>
+        </div>
+        <div class="btn-group">
+            <!-- https://getbootstrap.com/docs/5.2/components/modal/#how-it-works -->
+            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                data-bs-target="#filterModal">Filter By</button>
+        </div>
     </div>
 
-    <%- include('./partials/footer') %>
+    <% data.forEach((book)=> {%>
+        <div class="shelfContainer">
+            <div class="row g-1 justify-content-center">
+
+                <div class="col-6 col-md-2 shelfOrg">
+                    <a href="/bookshelf/<%=book._id%>">
+                        <%=book.title%>
+                    </a>
+                </div>
+
+                <div class="col-6 col-md-2 shelfOrg text-end">
+                    <%=book.authorLast%>, <%=book.authorFirst%>
+                </div>
+
+            </div>
+        </div>
+        <%})%>
+            </div>
+
+            <!-- Modal for filter-->
+            <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="filterModalLabel">Filter Choices</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="container modal-body text-center">
+                            <div class="row">
+                                <div class="col">
+                                    <input type="checkbox" name="audio">Audiobook<br />
+                                    <input type="checkbox" name="ebook">e-Book<br />
+                                    <input type="checkbox" name="paper">Paper/Hard-back<br />
+                                </div>
+                                <div class="col">
+                                    <input type="checkbox" name="readStatus" value="reading">Reading
+                                    It<br />
+                                    <input type="checkbox" name="readStatus" value="read">Finished
+                                    It<br />
+                                    <input type="checkbox" name="readStatus" value="wantToRead">Want
+                                    to Read<br />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <% tags.forEach((tag)=> {%>
+                                        <input class="col" type="checkbox">
+                                        <%=tag.tag%><br />
+                                            <%})%>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Filter</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <%- include('./partials/footer') %>
