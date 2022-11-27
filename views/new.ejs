@@ -1,33 +1,29 @@
 <%- include('./partials/header') %>
+    <div class="newContainer">
+        <div class="card" style="width: 18rem;">
+            <a href="/bookshelf" class="btn btn-sm btn-warning">View Shelf</a>
+            <form action="/create" method="POST">
+                Title: <input type="text" name="title" placeholder="Title" required><br />
 
-    <div class="card" style="width: 18rem;">
-        <a href="/bookshelf" class="btn btn-sm btn-warning">View Shelf</a>
-        <form action="/create" method="POST">
-            Title: <input type="text" name="title" placeholder="Title" required><br />
+                Author First: <input type="text" name="authorFirst" placeholder="Author; First" required><br />
+                Author Last: <input type="text" name="authorLast" placeholder="Author; Last" required><br />
 
-            Author First: <input type="text" name="authorFirst" placeholder="Author; First" required><br />
-            Author Last: <input type="text" name="authorLast" placeholder="Author; Last" required><br />
+                I Own it!<br />
+                <input type="checkbox" name="audio">Audiobook<br />
+                <input type="checkbox" name="ebook">e-Book<br />
+                <input type="checkbox" name="paper">Paper/Hard-back<br />
 
-            I Own it!<br />
-            <input type="checkbox" name="audio">Audiobook<br />
-            <input type="checkbox" name="ebook">e-Book<br />
-            <input type="checkbox" name="paper">Paper/Hard-back<br />
+                I Read it!<br />
+                <input type="radio" name="readStatus" value="reading">Reading It<br />
+                <input type="radio" name="readStatus" value="read">Finished It<br />
+                <input type="radio" name="readStatus" value="wantToRead">Want to Read<br />
 
-            I Read it!<br />
-            <input type="radio" name="readStatus" value="reading">Reading It<br />
-            <input type="radio" name="readStatus" value="read">Finished It<br />
-            <input type="radio" name="readStatus" value="wantToRead">Want to Read<br />
+                Genre Tags: <input type="text" name="genretag" placeholder="Genre Tags"><br />
 
-            Genre Tags: <input type="text" name="genretag" placeholder="Genre Tags"><br />
+                <input type="submit" class="btn btn-sm btn-primary" value="Add Book">
 
-            <input type="submit" class="btn btn-sm btn-primary" value="Add Book">
-
-        </form>
-        <a href="/bookshelf" class="btn btn-sm btn-danger">Cancel</a>
-        <div>
-
+            </form>
+            <a href="/bookshelf" class="btn btn-sm btn-danger">Cancel</a>
         </div>
-
     </div>
-
     <%- include('./partials/footer') %>

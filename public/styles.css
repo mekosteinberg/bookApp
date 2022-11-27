@@ -48,7 +48,9 @@ a {
     color: antiquewhite;
 }
 
-.bookshelfContainer {
+.bookshelfContainer,
+.editContainer,
+.newContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
