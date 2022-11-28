@@ -22,7 +22,7 @@ router.get('/bookshelf', requiresAuth(), async (req, res) => {
         limit = 10,
     } = req.query;
 
-//ensures that the full list always sorts ascending by title
+    //ensures that the full list always sorts ascending by title
     const sortBy = !req.query.sortBy
         ? 'title'
         : req.query.sortBy
@@ -90,7 +90,7 @@ router.get('/bookshelf', requiresAuth(), async (req, res) => {
         .sort({ [sortBy]: sortDirection })
         .skip((page - 1) * limit)
         .limit(limit * 1);
-    
+
     const count = await bookSchema.count(bookQuery);
 
     const tags = await bookSchema.aggregate([

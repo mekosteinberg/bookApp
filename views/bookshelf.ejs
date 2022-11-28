@@ -69,42 +69,63 @@
                                 <div class="row justify-content-left">
                                     <div class="col-12">
                                         <div class="row">
-                                            <div class="col text-start"><input type="checkbox" name="bookFormat"
-                                                    value="audio" <%=bookFormat && bookFormat.includes('audio')
-                                                    ? 'checked' : '' %>>Audiobook
+                                            <div class="col text-start form-check">
+                                                <input type="checkbox" class="form-check-input" name="bookFormat"
+                                                    value="audio" id="audioCheckbox" <%=bookFormat &&
+                                                    bookFormat.includes('audio') ? 'checked' : '' %>>
+                                                <label class="form-check-label"
+                                                    for="audioCheckbox">Audiobook</label><br />
                                             </div>
-                                            <div class="col text-start"><input type="checkbox" name="readStatus"
-                                                    value="reading" <%=readStatus && readStatus.includes('reading')
-                                                    ? 'checked' : '' %>>Reading
-                                                It</div>
+                                            <div class="col text-start form-check">
+                                                <input type="radio" class="form-check-input" name="readStatus"
+                                                    value="reading" id="readingRadio" <%=readStatus &&
+                                                    readStatus.includes('reading') ? 'checked' : '' %>>
+                                                <label class="form-check-label" for="readingRadio">Reading
+                                                    It</label><br />
+                                            </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col text-start"><input type="checkbox" name="bookFormat"
-                                                    value="ebook" <%=bookFormat && bookFormat.includes('ebook')
-                                                    ? 'checked' : '' %>>e-Book</div>
-                                            <div class="col text-start"><input type="checkbox" name="readStatus"
-                                                    value="read" <%=readStatus && readStatus.includes('read')
-                                                    ? 'checked' : '' %>>Finished
-                                                It</div>
+                                            <div class="col text-start form-check">
+                                                <input type="checkbox" class="form-check-input" name="bookFormat"
+                                                    value="ebook" id="ebookCheckbox" <%=bookFormat &&
+                                                    bookFormat.includes('ebook') ? 'checked' : '' %>>
+                                                <label class="form-check-label" for="ebookCheckbox">e-Book</label><br />
+                                            </div>
+                                            <div class="col text-start form-check">
+                                                <input type="radio" class="form-check-input" name="readStatus"
+                                                    value="read" id="readRadio" <%=readStatus &&
+                                                    readStatus.includes('read') ? 'checked' : '' %>>
+                                                <label class="form-check-label" for="readRadio">Finished
+                                                    It</label><br />
+                                            </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col text-start"><input type="checkbox" name="bookFormat"
-                                                    value="paper" <%=bookFormat && bookFormat.includes('paper')
-                                                    ? 'checked' : '' %>>Paper/Hard-back
+                                            <div class="col text-start form-check">
+                                                <input type="checkbox" class="form-check-input" name="bookFormat"
+                                                    value="paper" id="paperCheckbox" <%=bookFormat &&
+                                                    bookFormat.includes('paper') ? 'checked' : '' %>>
+                                                <label class="form-check-label"
+                                                    for="paperCheckbox">Paper/Hard-back</label>
                                             </div>
-                                            <div class="col text-start"><input type="checkbox" name="readStatus"
-                                                    value="wantToRead" <%=readStatus &&
-                                                    readStatus.includes('wantToRead') ? 'checked' : '' %>>Want
-                                                to Read</div>
+                                            <div class="col text-start form-check">
+                                                <input type="radio" class="form-check-input" name="readStatus"
+                                                    value="wantToRead" id="wantToReadRadio" <%=readStatus &&
+                                                    readStatus.includes('wantToRead') ? 'checked' : '' %>>
+                                                <label class="form-check-label" for="wantToReadRadio">Want to
+                                                    Read</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col text-start">
-                                        <% tags.forEach(({tag})=> {%>
-                                            <input class="col" type="checkbox" name="tags" value="<%=tag%>"
-                                                <%=filtertags && filtertags.includes(tag) ? 'checked' : '' %>>
-                                            <%=tag%><br />
+                                    <div class="col text-start form-check">
+                                        <% tags.forEach(({tag}, index)=> {%>
+                                            <input type="checkbox" class="col form-check-input" name="tags"
+                                                value="<%=tag%>" <%=filtertags && filtertags.includes(tag) ? 'checked'
+                                                : '' %> id="{'genreTagInput' + <%=index%>}">
+                                                <label class="form-check-label" for="{'genreTagInput' + <%=index%>}">
+                                                    <%=tag%>
+                                                </label><br />
                                                 <%})%>
                                     </div>
                                 </div>

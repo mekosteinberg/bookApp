@@ -118,3 +118,9 @@ footer a {
     padding: 0 1rem;
 
 }
+
+.gitIcon {
+    border: 3px single goldenrod;
+    border-radius: 8px;
+    background-color: whitesmoke;
+}
