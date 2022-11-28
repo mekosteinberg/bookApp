@@ -50,7 +50,8 @@ a {
 
 .bookshelfContainer,
 .editContainer,
-.newContainer {
+.newContainer,
+.pagContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;

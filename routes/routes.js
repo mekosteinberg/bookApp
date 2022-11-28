@@ -16,16 +16,13 @@ router.get('/', (req, res) => {
 //bookshelf/list
 router.get('/bookshelf', requiresAuth(), async (req, res) => {
     console.log('-----query params', req.query)
+    // https://dev.to/hakimraissi/pagination-with-express-and-mongoose-pnh
     const {
-        // sortBy,
-        // sortDirection,
-        skip,
-        limit,
-        // tags: filtertags,
-        // bookFormat,
-        // readStatus
+        page = 1,
+        limit = 10,
     } = req.query;
 
+//ensures that the full list always sorts ascending by title
     const sortBy = !req.query.sortBy
         ? 'title'
         : req.query.sortBy
@@ -91,8 +88,10 @@ router.get('/bookshelf', requiresAuth(), async (req, res) => {
 
     const allBooks = await bookSchema.find(bookQuery)
         .sort({ [sortBy]: sortDirection })
-        .skip(skip || 0)
-        .limit(limit || 10);
+        .skip((page - 1) * limit)
+        .limit(limit * 1);
+    
+    const count = await bookSchema.count(bookQuery);
 
     const tags = await bookSchema.aggregate([
         {
@@ -126,7 +125,7 @@ router.get('/bookshelf', requiresAuth(), async (req, res) => {
         }
     ])
 
-    res.render('bookshelf.ejs', { data: allBooks, sortBy, sortDirection, tags, filtertags, readStatus, bookFormat });
+    res.render('bookshelf.ejs', { data: allBooks, sortBy, sortDirection, tags, filtertags, readStatus, bookFormat, count, page, limit });
 
 });
 

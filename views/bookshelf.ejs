@@ -39,7 +39,20 @@
             </div>
         </div>
         <%})%>
+            <div class="pagContainer">
+                <div>
+                    Total Books <%=count%>
+                </div>
+                <div class="nextPrev">
+                    <button type="button" class="btn btn-sm btn-primary" id="prevBtn" <%=page==1 ? "disabled" : ""
+                        %>>Prev</button>
+                    <button type="button" class="btn btn-sm btn-primary" id="nextBtn" <%=((page-1) * limit) + limit>=
+                        count
+                        ? "disabled" : ''
+                        %>>Next</button>
+                </div>
             </div>
+
 
             <!-- Modal for filter-->
             <form action="" id="filterForm">

@@ -53,7 +53,35 @@ $(() => {
         $(this).serializeArray().forEach(element => {
             params.append(element.name, element.value)
         });
+        //set filter to always go to page 1. otherwise if you try to filter on a diff page
+        //even if the results dont have that many pages
+        params.set('page', 1)
+
         // console.log(params.toString())
+        url.search = params.toString()
+        window.location = url.href
+    })
+
+    // wire up click handler for next and previous buttons
+    // use .get() for url search params to try and get current page value. if empty, use 1
+    // for next incremet page value. for previous decrement page value.
+    $('#prevBtn').on('click', function (event) {
+
+        const url = new URL(window.location.href)
+        const params = new URLSearchParams(url.search);
+        const page = params.get('page')
+        //multiply by 1 to ensure page is a number
+        params.set('page', (page * 1) - 1)
+        url.search = params.toString()
+        window.location = url.href
+    })
+
+    $('#nextBtn').on('click', function (event) {
+
+        const url = new URL(window.location.href)
+        const params = new URLSearchParams(url.search);
+        const page = params.get('page') || 1
+        params.set('page', (page * 1) + 1)
         url.search = params.toString()
         window.location = url.href
     })
