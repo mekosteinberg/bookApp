@@ -1,34 +1,64 @@
 <%- include('./partials/header') %>
     <div class="editContainer">
-        <div class="card" style="width: 18rem;">
-            
+        <div class="card" style="width: 20rem;">
+
             <form action="/bookshelf/<%=data._id%>?_method=PUT" method="POST">
                 <a href="/bookshelf" class="btn btn-sm btn-outline-primary">Back to Shelf</a>
-                Title: <input type="text" name="title" value="<%=data.title%>"><br />
 
-                Author First: <input type="text" name="authorFirst" value="<%=data.authorFirst%>"><br />
-                Author Last: <input type="text" name="authorLast" value="<%=data.authorLast%>"><br />
+                <div class="form-floating mb-2 mt-2">
+                    <input type="text" class="form-control" name="title" id="titleInput" value="<%=data.title%>">
+                    <label for="titleInput">Title:</label>
+                </div>
 
-                I Own it!<br />
-                <input type="checkbox" name="audio" <%=data.own.audio ? "checked" : "" %>>Audiobook<br />
-                <input type="checkbox" name="ebook" <%=data.own.ebook ? "checked" : "" %>>e-Book<br />
-                <input type="checkbox" name="paper" <%=data.own.paper ? "checked" : "" %>>Paper/Hard-back<br />
+                <div class="form-floating">
+                    <input type="text" class="form-control" name="authorFirst" id="authorFirstInput"
+                        value="<%=data.authorFirst%>">
+                    <label for="authorFirstInput">Author, First Name:</label>
+                </div>
 
-                I Read it!<br />
-                <input type="radio" name="readStatus" value="reading" <%=data.readStatus==='reading' ? "checked" : ""
-                    %>>Reading
-                It<br />
-                <input type="radio" name="readStatus" value="read" <%=data.readStatus==='read' ? "checked" : ""
-                    %>>Finished
-                It<br />
-                <input type="radio" name="readStatus" value="wantToRead" <%=data.readStatus==='wantToRead' ? "checked"
-                    : "" %>>Want to Read<br />
+                <div class="form-floating mb-2 mt-2">
+                    <input type="text" class="form-control" name="authorLast" id="authorLastInput"
+                        value="<%=data.authorLast%>">
+                    <label for="authorLastInput">Author, Last Name:</label>
+                </div>
 
-                Genre Tags: <input type="text" name="genretag" value="<%=data.genretag%>"><br />
-                <input type="submit" class="btn btn-sm btn-primary" value="Save Changes">
+                <div class="form-check">
+                    <div><strong>Own Status:</strong></div>
+                    <input type="checkbox" class="form-check-input" name="audio" id="audioCheckbox" <%=data.own.audio
+                        ? "checked" : "" %>>
+                    <label class="form-check-label" for="audioCheckbox">Audiobook</label><br />
+                    <input type="checkbox" class="form-check-input" name="ebook" id="ebookCheckbox" <%=data.own.ebook
+                        ? "checked" : "" %>>
+                    <label class="form-check-label" for="ebookCheckbox">e-Book</label><br />
+                    <input type="checkbox" class="form-check-input" name="paper" id="paperCheckbox" <%=data.own.paper
+                        ? "checked" : "" %>>
+                    <label class="form-check-label" for="paperCheckbox">Paper/Hard-back</label>
+                </div><br />
+
+                <div class="form-check">
+                    <div><strong>Read Status:</strong></div>
+                    <input type="radio" class="form-check-input" name="readStatus" value="reading" id="readingRadio"
+                        <%=data.readStatus==='reading' ? "checked" : "" %>>
+                    <label class="form-check-label" for="readingRadio">Reading It</label><br />
+                    <input type="radio" class="form-check-input" name="readStatus" value="read" id="readRadio"
+                        <%=data.readStatus==='read' ? "checked" : "" %>>
+                    <label class="form-check-label" for="readRadio">Finished It</label><br />
+                    <input type="radio" class="form-check-input" name="readStatus" value="wantToRead"
+                        id="wantToReadRadio" <%=data.readStatus==='wantToRead' ? "checked" : "" %>>
+                    <label class="form-check-label" for="wantToReadRadio">Want to Read</label>
+                </div>
+
+                <div class="form-floating mb-2 mt-2">
+                    <input type="text" class="form-control" name="genretag" id="genreTagInput"
+                        value="<%=data.genretag%>">
+                    <label for="genreTagInput">Genre Tags:</label>
+                </div>
+
+                <div>
+                    <input type="submit" class="btn btn-sm btn-primary mt-2" value="Save Changes">
+                    <a href="/bookshelf/<%=data._id%>" class="btn btn-sm btn-outline-danger mt-2">Cancel</a>
+                </div>
             </form>
-            <a href="/bookshelf/<%=data._id%>" class="btn btn-sm btn-danger">Cancel</a>
-
         </div>
     </div>
     <%- include('./partials/footer') %>

@@ -4,7 +4,7 @@
         <div>
             <h2>Book Details</h2>
 
-            <dl class="card" style="width: 18rem;">
+            <dl class="card" style="width: 20rem;">
                 <dt class="card-title">Title: <%=data.title%>
                 </dt>
                 <dt class="card-title">Author: <%=data.authorLast%>, <%=data.authorFirst%>
@@ -30,17 +30,20 @@
                 </dd>
                 <dt class="card-title">Tags: <%=data.tags%>
                 </dt>
+                <div class="backEdit">
+                    <a href="/bookshelf/<%=data._id%>/edit" class="btn btn-sm btn-primary">Edit This</a>
+                    <a href="/bookshelf" class="btn btn-sm btn-outline-primary">Back to Shelf</a>
+                    <form class="" action="/bookshelf/<%=data._id%>?_method=DELETE" method="POST">
+                        <input class="btn btn-sm btn-outline-danger mt-2" type="submit" value="Delete"
+                            onclick="return confirm('Do you really want to delete this book?')" />
+                    </form>
+                </div>
             </dl>
+            
         </div>
-        <div class="backEdit">
-            <a href="/bookshelf" class="btn btn-sm btn-primary">Back to Shelf</a>
-            <a href="/bookshelf/<%=data._id%>/edit" class="btn btn-sm btn-warning">Edit This</a>
-        </div>
+        
         <!-- <a href="/bookshelf"><img src="" alt="">Delete</a> -->
-        <form class="" action="/bookshelf/<%=data._id%>?_method=DELETE" method="POST">
-            <input class="btn btn-sm btn-danger" type="submit" value="Delete"
-                onclick="return confirm('Do you really want to delete this book?')" />
-        </form>
+        
     </div>
 
     <%- include('./partials/footer') %>
