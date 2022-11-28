@@ -3,7 +3,9 @@ Bootstrap Crash Course WebDevSimplified on Youtube https://www.youtube.com/watch
 Auth0
 npm install express express-openid-connect --save
 
-MDN for EVERYTHING ALL THE TIME
 
 to set query string params
 https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/set
+
+[Truncating text with CSS](https://www.youtube.com/watch?v=GxpUp0FecEw)
+[Truncate with ellipsis](https://www.youtube.com/watch?v=HRBAXPSXfcM)

@@ -1,12 +1,11 @@
 $(() => {
 
     $(".sort-item").on("click", function () {
-        console.log(window.location)
+
         //https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/set
         let url = new URL(window.location.href)
         let params = new URLSearchParams(url.search);
-        //shows the original state of sorting
-        console.log(params.toString())
+
         switch (this.id) {
             case "titleAsc":
                 params.set('sortBy', 'title')
@@ -24,20 +23,38 @@ $(() => {
                 params.set('sortBy', 'authorLast')
                 params.set('sortDirection', 'desc')
                 //next sort by title
-                // params.set('title', 'asc') 
+
                 break;
             default:
                 console.error("unknown value")
                 break;
         }
-        //shows the clicked state of sorting
-        console.log(params.toString())
+
         //changes the current url to the parameters of the clicked sort feature
         url.search = params.toString()
-        console.log(url)
         window.location = url.href
 
     })
+    // https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
+    $('#filterForm').on('submit', function (event) {
+        event.preventDefault();
 
-    console.log('ready')
+        let url = new URL(window.location.href)
+        let params = new URLSearchParams(url.search);
+        if (params.has('tags')) {
+            params.delete('tags')
+        }
+        if (params.has('bookFormat')) {
+            params.delete('bookFormat')
+        }
+        if (params.has('readStatus')) {
+            params.delete('readStatus')
+        }
+        $(this).serializeArray().forEach(element => {
+            params.append(element.name, element.value)
+        });
+        // console.log(params.toString())
+        url.search = params.toString()
+        window.location = url.href
+    })
 })

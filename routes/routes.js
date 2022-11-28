@@ -17,14 +17,79 @@ router.get('/', (req, res) => {
 router.get('/bookshelf', requiresAuth(), async (req, res) => {
     console.log('-----query params', req.query)
     const {
-        sortBy,
-        sortDirection,
+        // sortBy,
+        // sortDirection,
         skip,
         limit,
-        tag,
+        // tags: filtertags,
+        // bookFormat,
+        // readStatus
     } = req.query;
 
-    const allBooks = await bookSchema.find({ userid: req.oidc.user.sub })
+    const sortBy = !req.query.sortBy
+        ? 'title'
+        : req.query.sortBy
+
+    const sortDirection = !req.query.sortDirection
+        ? 'asc'
+        : req.query.sortDirection
+
+    //guarantee that these are always an array or undefined
+    const filtertags = req.query.tags && Array.isArray(req.query.tags)
+        ? req.query.tags
+        : req.query.tags
+            ? [req.query.tags]
+            : undefined
+
+    const bookFormat = req.query.bookFormat && Array.isArray(req.query.bookFormat)
+        ? req.query.bookFormat
+        : req.query.bookFormat
+            ? [req.query.bookFormat]
+            : undefined
+
+    const readStatus = req.query.readStatus && Array.isArray(req.query.readStatus)
+        ? req.query.readStatus
+        : req.query.readStatus
+            ? [req.query.readStatus]
+            : undefined
+
+    const bookQuery = {
+        userid: req.oidc.user.sub
+    }
+    //filter with read Status
+    // https://www.mongodb.com/docs/manual/reference/operator/query/
+    if (readStatus) {
+        // if (Array.isArray(readStatus)) {
+        bookQuery.readStatus = {
+            $in: readStatus
+        }
+        // } else {
+        //     bookQuery.readStatus = readStatus
+        // }
+    }
+
+    //filter with Own Status (Paper/Audio/ebook) 
+    if (bookFormat) {
+        // if (Array.isArray(bookFormat)) {
+        bookQuery['$or'] = []
+        bookFormat.forEach(item => {
+            bookQuery['$or'].push({ ['own.' + item]: true })
+            //example: checks when clicked to see if own.paper: true in the database
+        })
+        // } else {
+        //     //if only one item is checked in the filter box then it doesnt go through the 'or' function and checks if its true
+        //     //own is wrapped in brackets because it needs to pull the value of own, not use the key own.
+        //     bookQuery['own.' + bookFormat] = true
+        // }
+    }
+
+    //filter with tags (genre tags)
+    if (filtertags) {
+        bookQuery.tags = { $all: filtertags }
+    }
+    console.log(bookQuery)
+
+    const allBooks = await bookSchema.find(bookQuery)
         .sort({ [sortBy]: sortDirection })
         .skip(skip || 0)
         .limit(limit || 10);
@@ -56,11 +121,12 @@ router.get('/bookshelf', requiresAuth(), async (req, res) => {
                     '$first': '$tags'
                 }
             }
+        }, {
+            $sort: { tag: 1 }
         }
     ])
 
-    console.log(tags)
-    res.render('bookshelf.ejs', { data: allBooks, sortBy, sortDirection, tags });
+    res.render('bookshelf.ejs', { data: allBooks, sortBy, sortDirection, tags, filtertags, readStatus, bookFormat });
 
 });
 
