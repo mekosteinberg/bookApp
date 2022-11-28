@@ -1,29 +1,55 @@
 <%- include('./partials/header') %>
     <div class="newContainer">
         <div class="card" style="width: 18rem;">
-            <a href="/bookshelf" class="btn btn-sm btn-warning">View Shelf</a>
+
+
             <form action="/create" method="POST">
-                Title: <input type="text" name="title" placeholder="Title" required><br />
+                <a href="/bookshelf" class="btn btn-sm btn-outline-primary">Back to Shelf</a>
+                <div class="form-floating mb-2 mt-2">
+                    <input type="text" class="form-control" name="title" id="titleInput" placeholder="Title" required>
+                    <label for="titleInput">Title:</label>
+                </div>
+                <div class="form-floating">
+                    <input type="text" class="form-control" name="authorFirst" id="authorFirstInput"
+                        placeholder="Author; First" required>
+                    <label for="authorFirstInput">Author, First Name:</label>
+                </div>
+                <div class="form-floating mb-2 mt-2">
+                    <input type="text" class="form-control" name="authorLast" id="authorLastInput"
+                        placeholder="Author; First" required>
+                    <label for="authorLastInput">Author, Last Name:</label>
+                </div>
+                <div class="form-check">
+                    I Own it!<br />
+                    <input type="checkbox" class="form-check-input" name="audio" id="audioCheckbox">
+                    <label class="form-check-label" for="audioCheckbox">Audiobook</label><br />
+                    <input type="checkbox" class="form-check-input" name="ebook" id="ebookCheckbox">
+                    <label class="form-check-label" for="ebookCheckbox">e-Book</label><br />
+                    <input type="checkbox" class="form-check-input" name="paper" id="paperCheckbox">
+                    <label class="form-check-label" for="paperCheckbox">Paper/Hard-back</label><br />
+                </div>
+                <div class="form-check">
+                    I Read it!<br />
+                    <input type="radio" class="form-check-input" name="readStatus" value="reading" id="readingRadio">
+                    <label class="form-check-label" for="readingRadio">Reading It</label><br />
+                    <input type="radio" class="form-check-input" name="readStatus" value="read" id="readRadio">
+                    <label class="form-check-label" for="readRadio">Finished It</label><br />
+                    <input type="radio" class="form-check-input" name="readStatus" value="wantToRead"
+                        id="wantToReadRadio">
+                    <label class="form-check-label" for="wantToReadRadio">Want to Read</label><br />
 
-                Author First: <input type="text" name="authorFirst" placeholder="Author; First" required><br />
-                Author Last: <input type="text" name="authorLast" placeholder="Author; Last" required><br />
-
-                I Own it!<br />
-                <input type="checkbox" name="audio">Audiobook<br />
-                <input type="checkbox" name="ebook">e-Book<br />
-                <input type="checkbox" name="paper">Paper/Hard-back<br />
-
-                I Read it!<br />
-                <input type="radio" name="readStatus" value="reading">Reading It<br />
-                <input type="radio" name="readStatus" value="read">Finished It<br />
-                <input type="radio" name="readStatus" value="wantToRead">Want to Read<br />
-
-                Genre Tags: <input type="text" name="genretag" placeholder="Genre Tags"><br />
-
-                <input type="submit" class="btn btn-sm btn-primary" value="Add Book">
-
+                </div>
+                <div class="form-floating mb-2 mt-2">
+                    <input type="text" class="form-control" name="genretag" id="genreTagInput" placeholder="Genre Tags">
+                    <label for="genreTagInput">Genre Tags:</label>
+                </div>
+                <div>
+                    <input type="submit" class="btn btn-sm btn-primary mt-2" value="Add Book">
+                    <a href="/bookshelf" class="btn btn-sm btn-outline-danger mt-2">Cancel</a>
+                </div>
             </form>
-            <a href="/bookshelf" class="btn btn-sm btn-danger">Cancel</a>
+
+
         </div>
     </div>
     <%- include('./partials/footer') %>

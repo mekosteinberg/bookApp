@@ -1,8 +1,9 @@
 <%- include('./partials/header') %>
     <div class="editContainer">
         <div class="card" style="width: 18rem;">
-            <a href="/bookshelf" class="btn btn-sm btn-warning">View Shelf</a>
+            
             <form action="/bookshelf/<%=data._id%>?_method=PUT" method="POST">
+                <a href="/bookshelf" class="btn btn-sm btn-outline-primary">Back to Shelf</a>
                 Title: <input type="text" name="title" value="<%=data.title%>"><br />
 
                 Author First: <input type="text" name="authorFirst" value="<%=data.authorFirst%>"><br />
