@@ -13,3 +13,5 @@ https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/set
 
 [Truncating text with CSS](https://www.youtube.com/watch?v=GxpUp0FecEw)
 [Truncate with ellipsis](https://www.youtube.com/watch?v=HRBAXPSXfcM)
+
+[Basic Ternary info](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator)

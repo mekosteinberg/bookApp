@@ -39,10 +39,12 @@
             </div>
         </div>
         <%})%>
-            <div class="pagContainer">
+            <div class="pagContainer mt-3">
+                <!-- //shows the current amount of books on the page -->
                 <div>
-                    Total Books <%=count%>
+                    Showing: <%=((page-1) * limit +1)%> of <%=((page-1) * limit + data.length)%>
                 </div>
+
                 <div class="nextPrev">
                     <button type="button" class="btn btn-sm btn-primary" id="prevBtn" <%=page==1 ? "disabled" : ""
                         %>>Prev</button>
@@ -50,6 +52,10 @@
                         count
                         ? "disabled" : ''
                         %>>Next</button>
+                </div>
+                <!-- //shows the total books in either the complete list or the filtered/sorted lists -->
+                <div>
+                    Total Books in Current List: <%=count%>
                 </div>
             </div>
 

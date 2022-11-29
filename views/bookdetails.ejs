@@ -28,22 +28,23 @@
                     <input type="radio" name="readStatus" value="wantToRead" <%=data.readStatus==='wantToRead'
                         ? "checked" : "" %> disabled>Want to Read<br />
                 </dd>
-                <dt class="card-title">Tags: <%=data.tags%>
+                <dt class="card-title">Tags:
+                    <%=data.tags.join(', ')%>
                 </dt>
                 <div class="backEdit">
                     <a href="/bookshelf/<%=data._id%>/edit" class="btn btn-sm btn-primary">Edit This</a>
                     <a href="/bookshelf" class="btn btn-sm btn-outline-primary">Back to Shelf</a>
                     <form class="" action="/bookshelf/<%=data._id%>?_method=DELETE" method="POST">
                         <input class="btn btn-sm btn-outline-danger mt-2" type="submit" value="Delete"
-                            onclick="return confirm('Do you really want to delete this book?')" />
+                            onclick="return confirm(' Do you really want to delete this book?')" />
                     </form>
-                </div>
-            </dl>
-            
         </div>
-        
-        <!-- <a href="/bookshelf"><img src="" alt="">Delete</a> -->
-        
+        </dl>
+
+    </div>
+
+    <!-- <a href="/bookshelf"><img src="" alt="">Delete</a> -->
+
     </div>
 
     <%- include('./partials/footer') %>
