@@ -22,13 +22,15 @@ $(() => {
             case "authorDesc":
                 params.set('sortBy', 'authorLast')
                 params.set('sortDirection', 'desc')
-                //next sort by title
-
                 break;
             default:
                 console.error("unknown value")
                 break;
         }
+
+        //set filter to always go to page 1. otherwise if you try to filter on a diff page
+        //even if the results dont have that many pages
+        params.set('page', 1)
 
         //changes the current url to the parameters of the clicked sort feature
         url.search = params.toString()
@@ -39,8 +41,8 @@ $(() => {
     $('#filterForm').on('submit', function (event) {
         event.preventDefault();
 
-        let url = new URL(window.location.href)
-        let params = new URLSearchParams(url.search);
+        const url = new URL(window.location.href)
+        const params = new URLSearchParams(url.search);
         if (params.has('tags')) {
             params.delete('tags')
         }
@@ -57,6 +59,21 @@ $(() => {
         //even if the results dont have that many pages
         params.set('page', 1)
 
+        // console.log(params.toString())
+        url.search = params.toString()
+        window.location = url.href
+    })
+
+    $('#searchForm').on('submit', function(event) {
+        event.preventDefault();
+        const url = new URL(window.location.href)
+        const params = new URLSearchParams();
+        params.set('page', 1)
+        // to make the search string safe for the url, it needs to be encoded
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent
+        const searchValue = $('#searchField').val()
+        const encodedSearch = encodeURIComponent(searchValue)
+        params.set('search', encodedSearch)
         // console.log(params.toString())
         url.search = params.toString()
         window.location = url.href

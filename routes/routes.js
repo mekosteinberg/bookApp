@@ -20,6 +20,7 @@ router.get('/bookshelf', requiresAuth(), async (req, res) => {
     const {
         page = 1,
         limit = 10,
+        search,
     } = req.query;
 
     //ensures that the full list always sorts ascending by title
@@ -28,8 +29,10 @@ router.get('/bookshelf', requiresAuth(), async (req, res) => {
         : req.query.sortBy
 
     const sortDirection = !req.query.sortDirection
-        ? 'asc'
-        : req.query.sortDirection
+        ? 1 // 1 is asc, -1 is desc
+        : req.query.sortDirection === 'desc'
+            ? -1
+            : 1 // safely fall back to asc sort in case somoene is playing with the url
 
     //guarantee that these are always an array or undefined
     const filtertags = req.query.tags && Array.isArray(req.query.tags)
@@ -49,6 +52,9 @@ router.get('/bookshelf', requiresAuth(), async (req, res) => {
         : req.query.readStatus
             ? [req.query.readStatus]
             : undefined
+
+    const bookAggregate = [];
+
 
     const bookQuery = {
         userid: req.oidc.user.sub
@@ -86,10 +92,91 @@ router.get('/bookshelf', requiresAuth(), async (req, res) => {
     }
     console.log(bookQuery)
 
-    const allBooks = await bookSchema.find(bookQuery)
-        .sort({ [sortBy]: sortDirection })
-        .skip((page - 1) * limit)
-        .limit(limit * 1);
+
+    // if user chose to search, don't use filter matches, just
+    // use the search phrase they sent in
+    if (search) {
+        const searchStage =
+        {
+            '$search': {
+                'index': 'bookSearch',
+                'compound': {
+                    'must': [
+                        {
+                            'text': {
+                                'query': req.oidc.user.sub,
+                                'path': 'userid'
+                            }
+                        }, {
+                            'text': {
+                                'query': decodeURIComponent(search), // search terms, decode, because we encoded in app.js 
+                                'path': [
+                                    'title', 'authorFirst', 'authorLast'
+                                ],
+                                'fuzzy': {
+                                    'maxExpansions': 5,
+                                    'maxEdits': 1
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+
+        // Have to use project to get access to the search score
+        // so results can be limited to ones with strong match. trying to
+        // avoid matching titles with "of" when searching "return of" 
+        const projectWithScore = {
+            '$project': {
+                'userid': 1,
+                'authorFirst': 1,
+                'authorLast': 1,
+                'title': 1,
+                'own': 1,
+                'readStatus': 1,
+                'tags': 1,
+                'score': {
+                    '$meta': 'searchScore' // this gets the search score, so less "strong" results are excluded in the match stage below
+                }
+            }
+        }
+
+        const matchHigherSearchScore = {
+            '$match': {
+                'score': {
+                    '$gte': 0.6 // played around a lot with this, some exact matches still have a low score, so this seemed the right spot currently
+                }
+            }
+        }
+
+        bookAggregate.push(searchStage, projectWithScore, matchHigherSearchScore)
+    } else {
+        const match = {
+            $match: bookQuery
+        }
+        const sort = {
+            $sort: {
+                [sortBy]: sortDirection
+            }
+        }
+        bookAggregate.push(match, sort)
+    }
+
+    bookAggregate.push({
+        '$skip': (page - 1) * limit
+    }, {
+        '$limit': limit * 1
+    })
+
+    console.log('----aggregate', JSON.stringify(bookAggregate))
+
+    const allBooks = await bookSchema.aggregate(bookAggregate)
+
+    // TODO remove these. not needed with aggregate pipeline doing sort, skip, limit    
+    // .sort({ [sortBy]: sortDirection })
+    // .skip((page - 1) * limit)
+    // .limit(limit * 1);
 
     const count = await bookSchema.count(bookQuery);
 

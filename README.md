@@ -15,3 +15,91 @@ https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams/set
 [Truncate with ellipsis](https://www.youtube.com/watch?v=HRBAXPSXfcM)
 
 [Basic Ternary info](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator)
+
+filter aggregate
+```js
+[
+  {
+    '$match': {
+      'userid': req.oidc.user.sub, 
+      'readStatus': {
+        '$in': [
+          'read'
+        ]
+      }, 
+      '$or': [
+        {
+          'own.paper': true
+        }
+      ], 
+      'tags': {
+        '$all': [
+          'Fantasy'
+        ]
+      }
+    }
+  }, {
+    '$sort': {
+      'title': 1
+    }
+  }, {
+    '$skip': 0
+  }, {
+    '$limit': 10
+  }
+]
+```
+
+search aggregate
+```js
+[
+  {
+    '$search': {
+      'index': 'bookSearch', 
+      'compound': {
+        'must': [
+          {
+            'text': {
+              'query': req.oidc.user.sub, 
+              'path': 'userid'
+            }
+          }, {
+            'text': {
+              'query': search, // search terms 
+              'path': [
+                'title', 'authorFirst', 'authorLast'
+              ], 
+              'fuzzy': {
+                'maxExpansions': 3
+              }
+            }
+          }
+        ]
+      }
+    }
+  }, {
+    '$project': {
+      'userid': 1, 
+      'authorFirst': 1, 
+      'authorLast': 1, 
+      'title': 1, 
+      'own': 1, 
+      'readStatus': 1, 
+      'tags': 1, 
+      'score': {
+        '$meta': 'searchScore'
+      }
+    }
+  }, {
+    '$match': {
+      'score': {
+        '$gte': 1
+      }
+    }
+  }, {
+    '$skip': 0
+  }, {
+    '$limit': 10
+  }
+]
+```
