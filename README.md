@@ -1,8 +1,6 @@
 # Book Dragon 
 [BookDragon Heroku](https://bookdragon.herokuapp.com/)
 
-[Meko's Github bookapp](https://github.com/mekosteinberg/bookApp)
-
 ## Technologies used
 - Express/Node
 - EJS
