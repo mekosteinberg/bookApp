@@ -1,5 +1,23 @@
 <%- include('./partials/header') %>
 
+    <div class="searchContainer mb-2 row">
+        <div class="col-12 col-md-4">
+            <form id="searchForm" class="form inline search" action="" method="GET">
+                <div class="row">
+                    <div class="col-10">
+                        <input id="searchField" class="form-control form-control-sm" type="search" placeholder="Search All Your Books"
+                            aria-label="Search">
+                    </div>
+                    <div class="col-2">
+                        <button class="btn btn-outline-warning btn-sm" type="submit"><i
+                                class="fa fa-search"></i></button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
     <div class="btn-toolbar">
         <div class="btn-group me-2">
             <a href="/new" class="btn btn-sm btn-warning">Add a Book</a>
@@ -42,7 +60,7 @@
             <div class="pagContainer mt-3">
                 <!-- //shows the current amount of books on the page -->
                 <div>
-                    Showing: <%=((page-1) * limit +1)%> of <%=((page-1) * limit + data.length)%>
+                    Showing: <%=((page-1) * limit +1)%> through <%=((page-1) * limit + data.length)%>
                 </div>
 
                 <div class="nextPrev">
@@ -83,7 +101,7 @@
                                                     for="audioCheckbox">Audiobook</label><br />
                                             </div>
                                             <div class="col text-start form-check">
-                                                <input type="radio" class="form-check-input" name="readStatus"
+                                                <input type="checkbox" class="form-check-input" name="readStatus"
                                                     value="reading" id="readingRadio" <%=readStatus &&
                                                     readStatus.includes('reading') ? 'checked' : '' %>>
                                                 <label class="form-check-label" for="readingRadio">Reading
@@ -98,7 +116,7 @@
                                                 <label class="form-check-label" for="ebookCheckbox">e-Book</label><br />
                                             </div>
                                             <div class="col text-start form-check">
-                                                <input type="radio" class="form-check-input" name="readStatus"
+                                                <input type="checkbox" class="form-check-input" name="readStatus"
                                                     value="read" id="readRadio" <%=readStatus &&
                                                     readStatus.includes('read') ? 'checked' : '' %>>
                                                 <label class="form-check-label" for="readRadio">Finished
@@ -114,7 +132,7 @@
                                                     for="paperCheckbox">Paper/Hard-back</label>
                                             </div>
                                             <div class="col text-start form-check">
-                                                <input type="radio" class="form-check-input" name="readStatus"
+                                                <input type="checkbox" class="form-check-input" name="readStatus"
                                                     value="wantToRead" id="wantToReadRadio" <%=readStatus &&
                                                     readStatus.includes('wantToRead') ? 'checked' : '' %>>
                                                 <label class="form-check-label" for="wantToReadRadio">Want to
@@ -126,12 +144,14 @@
                                 <div class="row">
                                     <div class="col text-start form-check">
                                         <% tags.forEach(({tag}, index)=> {%>
+                                            <!-- <div class="row tagBox"> -->
                                             <input type="checkbox" class="col form-check-input" name="tags"
                                                 value="<%=tag%>" <%=filtertags && filtertags.includes(tag) ? 'checked'
                                                 : '' %> id="{'genreTagInput' + <%=index%>}">
                                                 <label class="form-check-label" for="{'genreTagInput' + <%=index%>}">
                                                     <%=tag%>
                                                 </label><br />
+                                                <!-- </div> -->
                                                 <%})%>
                                     </div>
                                 </div>

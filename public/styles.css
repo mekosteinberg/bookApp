@@ -49,6 +49,7 @@ a {
 }
 
 .bookshelfContainer,
+.searchContainer,
 .editContainer,
 .newContainer,
 .pagContainer {
@@ -91,6 +92,19 @@ a {
 .modal {
     color: black;
 }
+
+/* trying to get my tags in the modal to wrap into new columns/rows
+.tagBox {
+    height: 1vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+}
+
+.tagBox>* {
+    flex: 1 1 80px;
+} */
 
 /* footer */
 #contactInfo {
