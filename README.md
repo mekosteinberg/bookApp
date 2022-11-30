@@ -1,8 +1,7 @@
 # Book Dragon 
 [BookDragon Heroku](https://bookdragon.herokuapp.com/)
-[Meko's Github bookapp](https://github.com/mekosteinberg/bookApp)
 
-![Wireframe](/Screen%20Shot%202022-11-23%20at%204.04.41%20PM.png)
+[Meko's Github bookapp](https://github.com/mekosteinberg/bookApp)
 
 ## Technologies used
 - Express/Node
@@ -36,6 +35,9 @@ Started to add styles with bootstrap and more found much more functionality. For
 I decided to implement login with Auth0 instead of creating and owning my own since most companies go this route.
 
 Data filtering was my big push on this project and I spent countless hours researching and looking at documentation for JQuery, MongoDB and lots of other sources to get my two features working. 
+
+## Wireframe
+![Wireframe](/Screen%20Shot%202022-11-23%20at%204.04.41%20PM.png)
 
 ## Links to some Resources
 Bootstrap Crash Course WebDevSimplified on Youtube https://www.youtube.com/watch?v=Jyvffr3aCp0
